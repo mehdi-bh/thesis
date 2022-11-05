@@ -1,2 +1,2 @@
-/workspace/target/classes/*
-/.idea
+/.idea/*
+/target/classes/*
