@@ -1,8 +1,12 @@
 package utils;
 
+import model.STN;
+import model.Solution;
+
 public class FloydWarshall {
-    public static double[][] compute (double[][] distanceMatrix) {
-        int n = distanceMatrix.length;
+    public static Solution compute (STN stn) {
+        int n = stn.getN();
+        double[][] distanceMatrix = stn.getNetwork();
 
         double[][] shortestPathsMatrix = new double[n][n];
         for (int i = 0; i < n; i++) {
@@ -18,6 +22,6 @@ public class FloydWarshall {
                 }
             }
         }
-        return shortestPathsMatrix;
+        return new Solution(shortestPathsMatrix);
     }
 }
