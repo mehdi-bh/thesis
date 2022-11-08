@@ -1,7 +1,7 @@
-package utils;
+package utils.STN;
 
-import model.STN;
-import model.Solution;
+import model.STN.STN;
+import model.STN.Solution;
 
 public class FloydWarshall {
     public static Solution compute (STN stn) {

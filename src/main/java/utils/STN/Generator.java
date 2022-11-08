@@ -1,10 +1,6 @@
-package utils;
+package utils.STN;
 
-import model.DTN;
-import model.STN;
-
-import java.util.ArrayList;
-import java.util.List;
+import model.STN.STN;
 
 public class Generator {
     public static STN exampleSTN() {
@@ -34,18 +30,5 @@ public class Generator {
         exampleNetwork[3][0] = 0;
 
         return new STN(4, exampleNetwork);
-    }
-
-    public static DTN exampleDTN() {
-        STN example = exampleSTN();
-        double [][] copy = exampleSTN().getNetwork();
-        copy[2][3] = 55;
-        copy[3][2] = -50;
-
-        List<STN> dtn = new ArrayList<>();
-        dtn.add(example);
-        dtn.add(new STN(4, copy));
-
-        return new DTN(dtn);
     }
 }
