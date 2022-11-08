@@ -2,11 +2,49 @@ package utils;
 
 import model.DTN;
 import model.STN;
+import org.apache.spark.ml.linalg.SparseMatrix;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Generator {
+
+    public static STN sprandSTN(int n, double d) {
+        SparseMatrix sm = SparseMatrix.sprand(n,n,d,new Random(5));
+
+        int[] colPtrs = sm.colPtrs();
+        int[] rowInd = sm.rowIndices();
+        double[] values = sm.values();
+
+        double[][] matrix = new double[n][n];
+        for (int i = 0; i < n; i++)
+            matrix[i] = new double[n];
+
+        int col = 0;
+        //Decompress matrix (Sprand generate compressed format since it's sparse)
+        for (int i = 0; i < values.length; i++) {
+            if (colPtrs[col+1] == i) col++;
+            matrix[rowInd[i]][col] = values[i];
+        }
+
+        Random rd = new Random();
+
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i != j){
+                    if (matrix[i][j] == 0) matrix[i][j] = Integer.MAX_VALUE;
+                    //add 50% of negative edges
+                    else matrix[i][j] *= (rd.nextBoolean() ? 1 : -1);
+                }
+                else matrix[i][j] = 0;
+            }
+        }
+
+        return new STN(n,matrix);
+    }
     public static STN exampleSTN() {
         /*
         T0 = Start
@@ -27,10 +65,10 @@ public class Generator {
         exampleNetwork[0][1] = 60;
         exampleNetwork[1][0] = 0;
         exampleNetwork[1][2] = 40;
-        exampleNetwork[2][1] = -20;
-        exampleNetwork[2][3] = 80;
+        exampleNetwork[2][1] = -30;
+        exampleNetwork[2][3] = 70;
         exampleNetwork[3][2] = -40;
-        exampleNetwork[0][3] = 120;
+        exampleNetwork[0][3] = 70;
         exampleNetwork[3][0] = 0;
 
         return new STN(4, exampleNetwork);

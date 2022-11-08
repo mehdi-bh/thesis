@@ -22,6 +22,15 @@ public class Utils {
         }
     }
 
+    public static boolean isConsistent(Solution solution){
+        double[][] tw = timeWindows(solution);
+        for (int i = 0; i < tw.length; i++) {
+            if (tw[i][0] < 0 || tw[i][1] < 0 || tw[i][0] > tw[i][1]) return false;
+
+        }
+        return true;
+    }
+
     public static void testSTN(STN stn) {
         printMatrix(stn.getNetwork());
 
