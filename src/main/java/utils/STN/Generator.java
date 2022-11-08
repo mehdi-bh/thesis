@@ -1,4 +1,4 @@
-package utils;
+package utils.STN;
 
 import model.DTN;
 import model.STN;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import model.STN.STN;
 
 public class Generator {
 

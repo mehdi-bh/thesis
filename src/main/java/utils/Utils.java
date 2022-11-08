@@ -1,7 +1,6 @@
 package utils;
 
-import model.STN;
-import model.Solution;
+import model.STN.Solution;
 
 import java.util.Arrays;
 

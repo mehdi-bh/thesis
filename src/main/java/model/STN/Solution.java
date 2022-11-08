@@ -1,4 +1,4 @@
-package model;
+package model.STN;
 
 public class Solution {
     private double [][] shortestPathsMatrix;

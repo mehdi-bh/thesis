@@ -10,6 +10,7 @@ import utils.Utils;
 import java.util.Random;
 
 import static utils.Utils.*;
+import utils.DTN.Generator;
 
 public class Main {
     public static void main(String[] args) {
@@ -41,7 +42,9 @@ public class Main {
 
             System.out.println("*** END SPRAND STN ***\n");
 
-        }
+//        DTN dtn = Generator.exampleDTN();
+//        DTNSolver.bruteForce(dtn);
 
+        System.out.println(Generator.generateDTN(5, 2, 5, 3));
     }
 }
