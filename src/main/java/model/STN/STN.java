@@ -15,9 +15,9 @@ public class STN {
         this.network = network;
     }
 
-    public STN(List<BinaryConstraint> bcs){
+    public STN(List<BinaryConstraint> bcs, int n){
         this.bcs = bcs;
-        this.n = bcs.size();
+        this.n = n;
         this.network = new double[n][];
 
         for (int i = 0; i < n; i++)
@@ -29,6 +29,14 @@ public class STN {
             else network[bs.getX()][bs.getY()] = bs.getR();
         }
 
+    }
+
+    public List<BinaryConstraint> getBcs() {
+        return bcs;
+    }
+
+    public void setBcs(List<BinaryConstraint> bcs) {
+        this.bcs = bcs;
     }
 
     public int getN() {

@@ -29,7 +29,7 @@ public class Generator {
 
             dtn.add(new DisjunctionConstraint(new ArrayList<>(constraint)));
         }
-        return new DTN(dtn);
+        return new DTN(dtn,n);
     }
 
     public static BinaryConstraint generateDisjunct(int n, int L){

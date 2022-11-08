@@ -1,5 +1,7 @@
 package utils.DTN;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,12 +16,13 @@ public class Utils {
     }
 
     public static int[] generateTwoRandom(int upperBound) {
-        Set<Integer> set = new Random().ints(0, upperBound)
+        List<Integer> list = new Random().ints(0, upperBound)
                 .distinct()
                 .limit(2)
                 .boxed()
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
-        return new int[] {(int) set.toArray()[0], (int) set.toArray()[1]};
+        Collections.shuffle(list);
+        return new int[] {list.get(0), list.get(1)};
     }
 }

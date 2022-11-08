@@ -17,13 +17,19 @@ public class Main {
 //        testSTN(ex);
 
 
-        DTN dtn = Generator.generateDTN(5, 2, 5, 3);
+        DTN dtn = Generator.generateDTN(5, 2, 15, 3);
 
 //        System.out.println(Generator.generateDTN(5, 2, 5, 3));
         System.out.println(dtn);
         List<STN> stns = dtn.stnCombinations();
 
         for (STN stn: stns){
+            System.out.println("*** NEW STN ***");
+            System.out.println(stn.getBcs());
+            printMatrix(stn.getNetwork());
+
+            System.out.println("*********");
+
             Solution solution = FloydWarshall.compute(stn);
 
             printMatrix(solution.getShortestPathsMatrix());
@@ -34,8 +40,10 @@ public class Main {
 
             boolean res = Utils.isConsistent(solution);
 
-            if (res)
-                System.out.println("*** STN  is consistent ***\n");
+            if (res){
+                System.out.println("*** STN is consistent ***\n");
+                return;
+            }
             System.out.println();
         }
 

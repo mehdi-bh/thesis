@@ -9,8 +9,11 @@ public class DTN {
     private List<DisjunctionConstraint> disjunctionConstraints;
     private List<List<BinaryConstraint>> stnCombinations;
 
-    public DTN(List<DisjunctionConstraint> disjunctionConstraints) {
+    private int n;
+
+    public DTN(List<DisjunctionConstraint> disjunctionConstraints, int n) {
         this.disjunctionConstraints = disjunctionConstraints;
+        this.n = n;
     }
 
     @Override
@@ -24,7 +27,7 @@ public class DTN {
 
         List<STN> stns = new ArrayList<>();
         for (List<BinaryConstraint> stn : stnCombinations)
-            stns.add(new STN(stn));
+            stns.add(new STN(stn,n));
 
         return stns;
     }
@@ -40,14 +43,10 @@ public class DTN {
         for (int i = indDC; i < disjunctionConstraints.size(); i++) {
             List<BinaryConstraint> c = disjunctionConstraints.get(i).getBinaryConstraints();
             for (int j = 0; j < c.size(); j++) {
-
                 cur.add(c.get(j));
                 stnCombinations(cur, i+1);
                 cur.remove(cur.size()-1);
-
             }
-//            cur.remove(cur.size()-1);
-
         }
 
     }
