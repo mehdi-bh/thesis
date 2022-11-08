@@ -1,7 +1,6 @@
 package utils.STN;
 
-import model.DTN;
-import model.STN;
+import model.DTN.DTN;
 import org.apache.spark.ml.linalg.SparseMatrix;
 
 import java.util.ArrayList;
@@ -75,16 +74,16 @@ public class Generator {
         return new STN(4, exampleNetwork);
     }
 
-    public static DTN exampleDTN() {
-        STN example = exampleSTN();
-        double [][] copy = exampleSTN().getNetwork();
-        copy[2][3] = 55;
-        copy[3][2] = -50;
-
-        List<STN> dtn = new ArrayList<>();
-        dtn.add(example);
-        dtn.add(new STN(4, copy));
-
-        return new DTN(dtn);
-    }
+//    public static DTN exampleDTN() {
+//        STN example = exampleSTN();
+//        double [][] copy = exampleSTN().getNetwork();
+//        copy[2][3] = 55;
+//        copy[3][2] = -50;
+//
+//        List<STN> dtn = new ArrayList<>();
+//        dtn.add(example);
+//        dtn.add(new STN(4, copy));
+//
+//        return new DTN(dtn);
+//    }
 }

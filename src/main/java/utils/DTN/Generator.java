@@ -1,8 +1,8 @@
 package utils.DTN;
 
-import model.DTN.Constraint;
+import model.DTN.DisjunctionConstraint;
 import model.DTN.DTN;
-import model.DTN.Disjunct;
+import model.DTN.BinaryConstraint;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,20 +19,20 @@ public class Generator {
     L = maximum integer value
      */
     public static DTN generateDTN(int n, int k, int m, int L) {
-        List<Constraint> dtn = new ArrayList<>();
+        List<DisjunctionConstraint> dtn = new ArrayList<>();
 
         for (int i = 0; i < m; i++) {
-            HashSet<Disjunct> constraint = new HashSet<>();
+            HashSet<BinaryConstraint> constraint = new HashSet<>();
             while (constraint.size() < k) {
                 constraint.add(generateDisjunct(n, L));
             }
 
-            dtn.add(new Constraint(new ArrayList<>(constraint)));
+            dtn.add(new DisjunctionConstraint(new ArrayList<>(constraint)));
         }
         return new DTN(dtn);
     }
 
-    public static Disjunct generateDisjunct(int n, int L){
+    public static BinaryConstraint generateDisjunct(int n, int L){
         // Select two random variables, make sure they are different
         int[] variables = generateTwoRandom(n);
 
@@ -42,6 +42,6 @@ public class Generator {
         int x = variables[0];
         int y = variables[1];
 
-        return new Disjunct(x, y, r);
+        return new BinaryConstraint(x, y, r);
     }
 }

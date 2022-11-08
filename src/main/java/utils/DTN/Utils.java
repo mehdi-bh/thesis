@@ -10,7 +10,6 @@ public class Utils {
                 .distinct()
                 .limit(1)
                 .boxed()
-                .collect(Collectors.toSet())
                 .toArray()[0];
     }
 

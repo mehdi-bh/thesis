@@ -1,36 +1,30 @@
-import model.DTN;
-import model.STN;
-import model.Solution;
-import org.apache.spark.ml.linalg.SparseMatrix;
-import utils.DTNSolver;
-import utils.FloydWarshall;
-import utils.Generator;
+import model.DTN.DTN;
+
+import model.STN.STN;
+import model.STN.Solution;
+import utils.DTN.Generator;
+import utils.STN.FloydWarshall;
 import utils.Utils;
 
-import java.util.Random;
+import java.util.List;
 
-import static utils.Utils.*;
-import utils.DTN.Generator;
+import static utils.Utils.printMatrix;
+import static utils.Utils.timeWindows;
 
 public class Main {
     public static void main(String[] args) {
 //        STN ex = Generator.exampleSTN();
 //        testSTN(ex);
 
-//        DTN dtn = Generator.exampleDTN();
-//        DTNSolver.bruteForce(dtn);
 
-        boolean res = false;
-        while (!res){
-            System.out.println("*** NEW SPRAND STN ***");
+        DTN dtn = Generator.generateDTN(5, 2, 5, 3);
 
-            STN example = Generator.sprandSTN(10,0.25);
-//            testSTN(example);
-            printMatrix(example.getNetwork());
+//        System.out.println(Generator.generateDTN(5, 2, 5, 3));
+        System.out.println(dtn);
+        List<STN> stns = dtn.stnCombinations();
 
-            System.out.println("*********");
-
-            Solution solution = FloydWarshall.compute(example);
+        for (STN stn: stns){
+            Solution solution = FloydWarshall.compute(stn);
 
             printMatrix(solution.getShortestPathsMatrix());
 
@@ -38,13 +32,39 @@ public class Main {
 
             printMatrix(timeWindows(solution));
 
-            res = Utils.isConsistent(solution);
+            boolean res = Utils.isConsistent(solution);
 
-            System.out.println("*** END SPRAND STN ***\n");
+            if (res)
+                System.out.println("*** STN  is consistent ***\n");
+            System.out.println();
+        }
 
-//        DTN dtn = Generator.exampleDTN();
-//        DTNSolver.bruteForce(dtn);
 
-        System.out.println(Generator.generateDTN(5, 2, 5, 3));
+    }
+
+    public static void sprandGenerator(){
+        //        boolean res = false;
+//        while (!res) {
+//            System.out.println("*** NEW SPRAND STN ***");
+//
+//            STN example = Generator.sprandSTN(10, 0.25);
+////            testSTN(example);
+//            printMatrix(example.getNetwork());
+//
+//            System.out.println("*********");
+//
+//            Solution solution = FloydWarshall.compute(example);
+//
+//            printMatrix(solution.getShortestPathsMatrix());
+//
+//            System.out.println("*********");
+//
+//            printMatrix(timeWindows(solution));
+//
+//            res = Utils.isConsistent(solution);
+//
+//            System.out.println("*** END SPRAND STN ***\n");
+//
+//        }
     }
 }

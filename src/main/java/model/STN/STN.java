@@ -1,12 +1,34 @@
 package model.STN;
 
+import model.DTN.BinaryConstraint;
+
+import java.util.List;
+
 public class STN {
     private int n;
     private double [][] network;
 
+    private List<BinaryConstraint> bcs;
+
     public STN(int n, double[][] network) {
         this.n = n;
         this.network = network;
+    }
+
+    public STN(List<BinaryConstraint> bcs){
+        this.bcs = bcs;
+        this.n = bcs.size();
+        this.network = new double[n][];
+
+        for (int i = 0; i < n; i++)
+            network[i] = new double[n];
+
+        for (BinaryConstraint bs: bcs){
+            if (network[bs.getX()][bs.getY()] != 0)
+                network[bs.getX()][bs.getY()] = Math.min(network[bs.getX()][bs.getY()],bs.getR());
+            else network[bs.getX()][bs.getY()] = bs.getR();
+        }
+
     }
 
     public int getN() {

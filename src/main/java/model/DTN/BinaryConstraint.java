@@ -1,11 +1,11 @@
 package model.DTN;
 
-public class Disjunct {
+public class BinaryConstraint {
     private int x;
     private int y;
     private int r;
 
-    public Disjunct(int x, int y, int r) {
+    public BinaryConstraint(int x, int y, int r) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -40,11 +40,11 @@ public class Disjunct {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Disjunct disjunct = (Disjunct) o;
+        BinaryConstraint binaryConstraint = (BinaryConstraint) o;
 
-        if (x != disjunct.x) return false;
-        if (y != disjunct.y) return false;
-        return r == disjunct.r;
+        if (x != binaryConstraint.x) return false;
+        if (y != binaryConstraint.y) return false;
+        return r == binaryConstraint.r;
     }
 
     @Override
