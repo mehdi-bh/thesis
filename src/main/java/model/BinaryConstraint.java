@@ -1,4 +1,4 @@
-package model.DTN;
+package model;
 
 public class BinaryConstraint {
     private int x;

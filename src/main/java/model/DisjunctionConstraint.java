@@ -1,4 +1,4 @@
-package model.DTN;
+package model;
 
 import java.util.List;
 

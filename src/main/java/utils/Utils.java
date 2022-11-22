@@ -1,20 +1,33 @@
 package utils;
 
-import model.STN.STN;
-import model.STN.Solution;
-import utils.STN.FloydWarshall;
+import model.STN;
+import model.Solution;
+import algorithms.FloydWarshall;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Utils {
-    public static double[][] timeWindows(Solution solution) {
-        double[][] matrix = solution.getShortestPathsMatrix();
-        double[][] timeWindows = new double[matrix.length][2];
-        for (int i = 0; i < matrix.length; i++) {
-            timeWindows[i][0] = Math.abs(matrix[i][0]);
-            timeWindows[i][1] = matrix[0][i];
-        }
-        return timeWindows;
+    public static int generateRandomInRange(int lowerBound, int upperBound) {
+        return (int) new Random().ints(lowerBound, upperBound)
+                .distinct()
+                .limit(1)
+                .boxed()
+                .toArray()[0];
+    }
+
+    public static int[] generateTwoRandom(int upperBound) {
+        List<Integer> list = new Random().ints(0, upperBound)
+                .distinct()
+                .limit(2)
+                .boxed()
+                .collect(Collectors.toList());
+
+        Collections.shuffle(list);
+        return new int[] {list.get(0), list.get(1)};
     }
 
     public static void printMatrix(double[][] matrix) {
@@ -23,17 +36,8 @@ public class Utils {
         }
     }
 
-    public static boolean isConsistent(Solution solution){
-        double[][] tw = timeWindows(solution);
-        for (int i = 0; i < tw.length; i++) {
-            if (tw[i][0] < 0 || tw[i][1] < 0 || tw[i][0] > tw[i][1]) return false;
-
-        }
-        return true;
-    }
-
     public static void testSTN(STN stn) {
-        printMatrix(stn.getNetwork());
+        printMatrix(stn.getMatrix());
 
         System.out.println("*********");
 
@@ -43,6 +47,6 @@ public class Utils {
 
         System.out.println("*********");
 
-        printMatrix(timeWindows(solution));
+        printMatrix(solution.timeWindows());
     }
 }

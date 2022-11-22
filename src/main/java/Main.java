@@ -1,32 +1,27 @@
-import model.DTN.DTN;
+import algorithms.StnCombinations;
+import model.DTN;
 
-import model.STN.STN;
-import model.STN.Solution;
-import utils.DTN.Generator;
-import utils.STN.FloydWarshall;
-import utils.Utils;
+import model.STN;
+import model.Solution;
+import utils.DtnGenerator;
+import algorithms.FloydWarshall;
 
 import java.util.List;
 
 import static utils.Utils.printMatrix;
-import static utils.Utils.timeWindows;
 
 public class Main {
     public static void main(String[] args) {
-//        STN ex = Generator.exampleSTN();
-//        testSTN(ex);
+        DTN dtn = DtnGenerator.generateDTN(5, 2, 15, 3);
 
-
-        DTN dtn = Generator.generateDTN(5, 2, 15, 3);
-
-//        System.out.println(Generator.generateDTN(5, 2, 5, 3));
         System.out.println(dtn);
-        List<STN> stns = dtn.stnCombinations();
 
-        for (STN stn: stns){
+        List<STN> STNs = StnCombinations.compute(dtn);
+
+        for (STN stn: STNs){
             System.out.println("*** NEW STN ***");
-            System.out.println(stn.getBcs());
-            printMatrix(stn.getNetwork());
+            System.out.println(stn.getBinaryConstraints());
+            printMatrix(stn.getMatrix());
 
             System.out.println("*********");
 
@@ -36,9 +31,9 @@ public class Main {
 
             System.out.println("*********");
 
-            printMatrix(timeWindows(solution));
+            printMatrix(solution.timeWindows());
 
-            boolean res = Utils.isConsistent(solution);
+            boolean res = solution.isConsistent();
 
             if (res){
                 System.out.println("*** STN is consistent ***\n");
@@ -46,33 +41,5 @@ public class Main {
             }
             System.out.println();
         }
-
-
-    }
-
-    public static void sprandGenerator(){
-        //        boolean res = false;
-//        while (!res) {
-//            System.out.println("*** NEW SPRAND STN ***");
-//
-//            STN example = Generator.sprandSTN(10, 0.25);
-////            testSTN(example);
-//            printMatrix(example.getNetwork());
-//
-//            System.out.println("*********");
-//
-//            Solution solution = FloydWarshall.compute(example);
-//
-//            printMatrix(solution.getShortestPathsMatrix());
-//
-//            System.out.println("*********");
-//
-//            printMatrix(timeWindows(solution));
-//
-//            res = Utils.isConsistent(solution);
-//
-//            System.out.println("*** END SPRAND STN ***\n");
-//
-//        }
     }
 }

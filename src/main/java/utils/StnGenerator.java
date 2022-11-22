@@ -1,15 +1,11 @@
-package utils.STN;
+package utils;
 
-import model.DTN.DTN;
 import org.apache.spark.ml.linalg.SparseMatrix;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
-import model.STN.STN;
+import model.STN;
 
-public class Generator {
+public class StnGenerator {
 
     public static STN sprandSTN(int n, double d) {
         SparseMatrix sm = SparseMatrix.sprand(n,n,d,new Random(5));

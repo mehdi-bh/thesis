@@ -1,17 +1,17 @@
-package utils.DTN;
+package utils;
 
-import model.DTN.DisjunctionConstraint;
-import model.DTN.DTN;
-import model.DTN.BinaryConstraint;
+import model.DisjunctionConstraint;
+import model.DTN;
+import model.BinaryConstraint;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import static utils.DTN.Utils.generateRandomInRange;
-import static utils.DTN.Utils.generateTwoRandom;
+import static utils.Utils.generateRandomInRange;
+import static utils.Utils.generateTwoRandom;
 
-public class Generator {
+public class DtnGenerator {
     /*
     n = number of variables
     k = number of disjunct per constraint

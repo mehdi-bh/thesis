@@ -1,14 +1,15 @@
-package utils.STN;
+package algorithms;
 
-import model.STN.STN;
-import model.STN.Solution;
+import model.STN;
+import model.Solution;
 
 public class FloydWarshall {
     public static Solution compute (STN stn) {
         int n = stn.getN();
-        double[][] distanceMatrix = stn.getNetwork();
 
+        double[][] distanceMatrix = stn.getMatrix();
         double[][] shortestPathsMatrix = new double[n][n];
+
         for (int i = 0; i < n; i++) {
             System.arraycopy(distanceMatrix[i], 0, shortestPathsMatrix[i], 0, n);
         }
