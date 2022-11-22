@@ -7,12 +7,15 @@ public class Solution {
         this.shortestPathsMatrix = shortestPathsMatrix;
     }
 
-    public double[][] timeWindows() {
+    public double[][] timeWindows(){
+        return timeWindows(0);
+    }
+    public double[][] timeWindows(int source) {
         double[][] matrix = shortestPathsMatrix;
         double[][] timeWindows = new double[matrix.length][2];
         for (int i = 0; i < matrix.length; i++) {
-            timeWindows[i][0] = Math.abs(matrix[i][0]);
-            timeWindows[i][1] = Math.abs(matrix[0][i]);
+            timeWindows[i][0] = Math.abs(matrix[i][source]);
+            timeWindows[i][1] = Math.abs(matrix[source][i]);
         }
         return timeWindows;
     }
