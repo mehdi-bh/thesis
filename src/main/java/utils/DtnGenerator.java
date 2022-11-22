@@ -67,12 +67,42 @@ public class DtnGenerator {
 
     public static STN feasibleSTNFromJobShopExample() {
         List<BinaryConstraint> binaryConstraints = new ArrayList<>();
-        binaryConstraints.add(new BinaryConstraint(0, 1, -3));
-        binaryConstraints.add(new BinaryConstraint(1, 2, -2));
-        binaryConstraints.add(new BinaryConstraint(3, 4, -2));
-        binaryConstraints.add(new BinaryConstraint(4, 5, -1));
-        binaryConstraints.add(new BinaryConstraint(6, 7, -4));
 
+        // Precedence and duration of jobs
+        binaryConstraints.add(new BinaryConstraint(0, 1, -3));
+        binaryConstraints.add(new BinaryConstraint(1, 0, 3));
+        binaryConstraints.add(new BinaryConstraint(1, 2, -2));
+        binaryConstraints.add(new BinaryConstraint(2, 1, 2));
+        binaryConstraints.add(new BinaryConstraint(3, 4, -2));
+        binaryConstraints.add(new BinaryConstraint(4, 3, 2));
+        binaryConstraints.add(new BinaryConstraint(4, 5, -1));
+        binaryConstraints.add(new BinaryConstraint(5, 4, 1));
+        binaryConstraints.add(new BinaryConstraint(6, 7, -4));
+        binaryConstraints.add(new BinaryConstraint(7, 6, 4));
+
+//        // Source to all starting nodes = 0
+//        binaryConstraints.add(new BinaryConstraint(8, 0, 0));
+//        binaryConstraints.add(new BinaryConstraint(8, 3, 0));
+//        binaryConstraints.add(new BinaryConstraint(8, 6, 0));
+//
+//        binaryConstraints.add(new BinaryConstraint(0, 8, 0));
+//        binaryConstraints.add(new BinaryConstraint(3, 8, 0));
+//        binaryConstraints.add(new BinaryConstraint(6, 8, 0));
+//
+//        // End to all starting nodes = 0
+//        binaryConstraints.add(new BinaryConstraint(9, 2, 0));
+//        binaryConstraints.add(new BinaryConstraint(9, 5, 0));
+//        binaryConstraints.add(new BinaryConstraint(9, 7, 0));
+//
+//        binaryConstraints.add(new BinaryConstraint(2, 9, 0));
+//        binaryConstraints.add(new BinaryConstraint(5, 9, 0));
+//        binaryConstraints.add(new BinaryConstraint(7, 9, 0));
+//
+//        // Precedence début fin
+//        binaryConstraints.add(new BinaryConstraint(8, 9, 21));
+//        binaryConstraints.add(new BinaryConstraint(9, 8, 0));
+
+        // Ordre des jobs dans les machines
         binaryConstraints.add(new BinaryConstraint(0, 3, -3));
         binaryConstraints.add(new BinaryConstraint(5, 1, -4));
         binaryConstraints.add(new BinaryConstraint(6, 1, -4));
@@ -81,6 +111,6 @@ public class DtnGenerator {
         binaryConstraints.add(new BinaryConstraint(4, 2, -1));
         binaryConstraints.add(new BinaryConstraint(7, 7, -3));
 
-        return new STN(8, binaryConstraints);
+        return new STN(10, binaryConstraints);
     }
 }

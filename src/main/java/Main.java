@@ -2,6 +2,7 @@ import algorithms.StnCombinations;
 import model.*;
 
 import algorithms.FloydWarshall;
+import utils.StnGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class Main {
         - l'exemple vient d'ici : https://developers.google.com/optimization/scheduling/job_shop
          */
         STN stn = feasibleSTNFromJobShopExample();
+//        STN stn = StnGenerator.exampleSTN();
         System.out.println(stn);
         printMatrix(stn.getMatrix());
         Solution solution = FloydWarshall.compute(stn);

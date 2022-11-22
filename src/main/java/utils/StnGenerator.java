@@ -61,10 +61,10 @@ public class StnGenerator {
         exampleNetwork[0][1] = 60;
         exampleNetwork[1][0] = 0;
         exampleNetwork[1][2] = 40;
-        exampleNetwork[2][1] = -30;
-        exampleNetwork[2][3] = 70;
+        exampleNetwork[2][1] = -20;
+        exampleNetwork[2][3] = 80;
         exampleNetwork[3][2] = -40;
-        exampleNetwork[0][3] = 70;
+        exampleNetwork[0][3] = 120;
         exampleNetwork[3][0] = 0;
 
         return new STN(4, exampleNetwork);
