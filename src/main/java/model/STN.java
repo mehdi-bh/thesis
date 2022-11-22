@@ -17,8 +17,14 @@ public class STN {
         this.n = n;
         this.matrix = new double[n][];
 
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             matrix[i] = new double[n];
+            for (int j = 0; j < n; j++) {
+                if (i != j) {
+                    matrix[i][j] = Double.MAX_VALUE;
+                }
+            }
+        }
 
         for (BinaryConstraint bc: binaryConstraints) {
             int x = bc.getX();
@@ -26,10 +32,15 @@ public class STN {
             int r = bc.getR();
 
             matrix[x][y] =
-                    matrix[x][y] != 0
+                    matrix[x][y] != Double.MAX_VALUE
                     ?
-                    Math.min(matrix[x][y],r) : r;
+                    Math.min(matrix[x][y], r) : r;
         }
+    }
+
+    @Override
+    public String toString() {
+        return binaryConstraints.toString();
     }
 
     public List<BinaryConstraint> getBinaryConstraints() {

@@ -6,9 +6,9 @@ public class DTN {
     private int n;
     private List<DisjunctionConstraint> disjunctionConstraints;
 
-    public DTN(List<DisjunctionConstraint> disjunctionConstraints, int n) {
-        this.disjunctionConstraints = disjunctionConstraints;
+    public DTN(int n, List<DisjunctionConstraint> disjunctionConstraints) {
         this.n = n;
+        this.disjunctionConstraints = disjunctionConstraints;
     }
 
     @Override
