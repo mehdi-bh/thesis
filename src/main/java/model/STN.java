@@ -1,6 +1,8 @@
 package model;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class STN {
     private int n;
@@ -41,6 +43,19 @@ public class STN {
     @Override
     public String toString() {
         return binaryConstraints.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        STN stn = (STN) o;
+        return Arrays.equals(matrix, stn.matrix);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(matrix);
     }
 
     public List<BinaryConstraint> getBinaryConstraints() {

@@ -20,6 +20,22 @@ public class Solution {
         return timeWindows;
     }
 
+    public double[][] timeWindowsJobShop() {
+        double[][] matrix = shortestPathsMatrix;
+        double[][] timeWindows = new double[matrix.length][2];
+        for (int i = 0; i < matrix.length; i++) {
+            timeWindows[i][1] = Math.abs(matrix[i][0]);
+            timeWindows[i][0] = Math.abs(matrix[0][i]);
+        }
+        return timeWindows;
+    }
+
+    public boolean isJobShopConsistent(){
+        double[][] timeWindows = timeWindowsJobShop();
+        int n = timeWindows.length-1;
+        return timeWindows[n][0] <= timeWindows[n][1];
+//        return timeWindows[n][0] >= timeWindows[n][1];
+    }
     public boolean isConsistent(){
         double[][] timeWindows = timeWindows();
         for (double[] tw : timeWindows) {
