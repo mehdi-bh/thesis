@@ -1,9 +1,8 @@
 package utils;
 
-import model.DisjunctionConstraint;
-import model.DTN;
-import model.BinaryConstraint;
-import model.STN;
+import algorithms.FloydWarshall;
+import algorithms.StnCombinations;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,6 +12,29 @@ import static utils.Utils.*;
 import static utils.Utils.createMultipleBinaryConstraintList;
 
 public class DtnGenerator {
+
+    public static DTN generateConsistentDTN(int n, int k, int m, int L){
+        DTN dtnConsistent;
+
+        DTN dtn = generateDTN(n,k,m,L);
+        boolean isConsistent = false;
+
+        while(true){
+
+            List<STN> STNs = StnCombinations.compute(dtn);
+
+            for (STN stn: STNs){
+                Solution solution = FloydWarshall.compute(stn);
+
+                isConsistent = solution.isConsistent();
+                if (isConsistent){
+                    return dtn;
+                }
+            }
+            dtn = generateDTN(n,k,m,L);
+        }
+
+    }
     /*
     n = number of variables
     k = number of disjunct per constraint
@@ -135,55 +157,4 @@ public class DtnGenerator {
         return new STN(10, binaryConstraints);
     }
 
-//    public static STN feasibleSTNFromJobShopExample() {
-//        List<BinaryConstraint> binaryConstraints = new ArrayList<>();
-//
-//        // Precedence and duration of jobs
-//        binaryConstraints.add(new BinaryConstraint(0, 1, -3));
-////        binaryConstraints.add(new BinaryConstraint(1, 0, 3));
-//        binaryConstraints.add(new BinaryConstraint(1, 2, -2));
-////        binaryConstraints.add(new BinaryConstraint(2, 1, 2));
-//        binaryConstraints.add(new BinaryConstraint(3, 4, -2));
-////        binaryConstraints.add(new BinaryConstraint(4, 3, 2));
-//        binaryConstraints.add(new BinaryConstraint(4, 5, -1));
-////        binaryConstraints.add(new BinaryConstraint(5, 4, 1));
-//        binaryConstraints.add(new BinaryConstraint(6, 7, -4));
-////        binaryConstraints.add(new BinaryConstraint(7, 6, 4));
-//
-////        // Source to all starting nodes = 0
-//        binaryConstraints.add(new BinaryConstraint(8, 0, 0));
-//        binaryConstraints.add(new BinaryConstraint(8, 3, 0));
-//        binaryConstraints.add(new BinaryConstraint(8, 6, 0));
-//
-////        binaryConstraints.add(new BinaryConstraint(0, 8, 0));
-////        binaryConstraints.add(new BinaryConstraint(3, 8, 0));
-////        binaryConstraints.add(new BinaryConstraint(6, 8, 0));
-//
-////        // End to all starting nodes = 0
-////        binaryConstraints.add(new BinaryConstraint(9, 2, 0));
-////        binaryConstraints.add(new BinaryConstraint(9, 5, 0));
-////        binaryConstraints.add(new BinaryConstraint(9, 7, 0));
-//
-//        binaryConstraints.add(new BinaryConstraint(2, 9, 0));
-//        binaryConstraints.add(new BinaryConstraint(5, 9, 0));
-//        binaryConstraints.add(new BinaryConstraint(7, 9, 0));
-//
-////        // Precedence début fin
-////        binaryConstraints.add(new BinaryConstraint(8, 9, 21));
-////        binaryConstraints.add(new BinaryConstraint(9, 8, 0));
-//
-//        // Ordre des jobs dans les machines
-//        binaryConstraints.add(new BinaryConstraint(0, 3, -3));
-////        binaryConstraints.add(new BinaryConstraint(3, 0, -2));
-//
-//        binaryConstraints.add(new BinaryConstraint(6, 5, -4));
-//        binaryConstraints.add(new BinaryConstraint(5, 1, -4));
-////        binaryConstraints.add(new BinaryConstraint(6, 1, -4));
-//
-////        binaryConstraints.add(new BinaryConstraint(4, 2, -1));
-//        binaryConstraints.add(new BinaryConstraint(4, 7, -1));
-//        binaryConstraints.add(new BinaryConstraint(7, 2, -3));
-//
-//        return new STN(10, binaryConstraints);
-//    }
 }

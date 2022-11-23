@@ -15,7 +15,7 @@ public class Solution {
         double[][] timeWindows = new double[matrix.length][2];
         for (int i = 0; i < matrix.length; i++) {
             timeWindows[i][0] = Math.abs(matrix[i][source]);
-            timeWindows[i][1] = Math.abs(matrix[source][i]);
+            timeWindows[i][1] = matrix[source][i];
         }
         return timeWindows;
     }
@@ -39,7 +39,7 @@ public class Solution {
     public boolean isConsistent(){
         double[][] timeWindows = timeWindows();
         for (double[] tw : timeWindows) {
-            if (tw[0] < 0 || tw[1] < 0 || tw[0] > tw[1]) {
+            if (tw[0] < 0 || tw[1] < 0 || tw[0] > tw[1] || tw[1] >= Integer.MAX_VALUE || tw[0] >= Integer.MAX_VALUE) {
                 return false;
             }
         }

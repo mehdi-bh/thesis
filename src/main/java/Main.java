@@ -2,6 +2,7 @@ import algorithms.StnCombinations;
 import model.*;
 
 import algorithms.FloydWarshall;
+import utils.DtnGenerator;
 import utils.StnGenerator;
 
 import java.util.ArrayList;
@@ -16,9 +17,25 @@ import static utils.Utils.*;
 @SuppressWarnings("ALL")
 public class Main {
     public static void main(String[] args) {
-//        DTN dtn = DtnGenerator.generateDTN(5, 2, 15, 3);
 
-        //############# Example STN ############
+        //################## DTN Generator ##################
+        DTN dtn = DtnGenerator.generateConsistentDTN(5, 2, 15, 3);
+
+        List<STN> STNs = StnCombinations.compute(dtn);
+
+        int nbConsistent = 0;
+        for (STN stn: STNs){
+            Solution solution = FloydWarshall.compute(stn);
+            boolean isConsistent = solution.isConsistent();
+            if (isConsistent){
+                printMatrix(solution.getShortestPathsMatrix());
+                System.out.println("******** Time Windows ********");
+                printMatrix(solution.timeWindows());
+                if (++nbConsistent == 3) break;
+            }
+        }
+
+        //################## Example STN ##################
         STN exampleSTN = StnGenerator.exampleSTN();
         printMatrix(exampleSTN.getMatrix());
         Solution solution = FloydWarshall.compute(exampleSTN);
@@ -26,6 +43,7 @@ public class Main {
         printMatrix(solution.getShortestPathsMatrix());
         System.out.println("******** Time Windows ********");
         printMatrix(solution.timeWindows());
+
 
         //################## Modeling Job Shop in DTN ####################
         final List<List<Task>> allJobs =
