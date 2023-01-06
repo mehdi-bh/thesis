@@ -6,7 +6,16 @@ public class Solution {
     public Solution(double[][] shortestPathsMatrix) {
         this.shortestPathsMatrix = shortestPathsMatrix;
     }
-
+    
+    public static String[][] convertToHours(double[][] matrix) {
+        String [][] result = new String[matrix.length][matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                result[i][j] = (int)(matrix[i][j] / 60) + ":" + (int)(matrix[i][j] % 60);
+            }
+        }
+        return result;
+    }
     public double[][] timeWindows(){
         return timeWindows(0);
     }
