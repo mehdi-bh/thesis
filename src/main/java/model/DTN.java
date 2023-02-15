@@ -13,7 +13,11 @@ public class DTN {
 
     @Override
     public String toString() {
-        return disjunctionConstraints.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (DisjunctionConstraint disjunction : disjunctionConstraints) {
+            stringBuilder.append(disjunction.toString()).append("\n");
+        }
+        return stringBuilder.toString();
     }
 
     public List<DisjunctionConstraint> getDisjunctionConstraints() {

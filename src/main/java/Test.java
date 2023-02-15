@@ -59,8 +59,8 @@ public class Test {
         list.add(new BinaryConstraint(0, 8, 840));
         list.add(new BinaryConstraint(0, 12, 900));
 
-        list.add(new BinaryConstraint(8, 0, -600));
-        list.add(new BinaryConstraint(12, 0, -840));
+        list.add(new BinaryConstraint(7, 0, -600));
+        list.add(new BinaryConstraint(11, 0, -840));
 
         STN stn = new STN(13, list);
 

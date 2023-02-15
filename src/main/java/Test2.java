@@ -37,6 +37,7 @@ public class Test2 {
         list.add(new DisjunctionConstraint(createSingleBinaryConstraintList(2, 1, -45)));
 
         // disjunctions : if c < 1h then X otherwise not X
+        // 2 1 60 OR 3 4 30 AND 1 2 60 OR 3 4 0
         list.add(new DisjunctionConstraint(createMultipleBinaryConstraintList(new int[]{2, 3}, new int[]{1, 4}, new int[]{60, 30})));
         list.add(new DisjunctionConstraint(createMultipleBinaryConstraintList(new int[]{1, 3}, new int[]{2, 4}, new int[]{60, 0})));
 

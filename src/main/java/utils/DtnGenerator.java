@@ -14,13 +14,10 @@ import static utils.Utils.createMultipleBinaryConstraintList;
 public class DtnGenerator {
 
     public static DTN generateConsistentDTN(int n, int k, int m, int L){
-        DTN dtnConsistent;
-
         DTN dtn = generateDTN(n,k,m,L);
         boolean isConsistent = false;
 
         while(true){
-
             List<STN> STNs = StnCombinations.compute(dtn);
 
             for (STN stn: STNs){
@@ -31,17 +28,17 @@ public class DtnGenerator {
                     return dtn;
                 }
             }
-            dtn = generateDTN(n,k,m,L);
+            dtn = generateDTN(n, k, m, L);
         }
-
     }
+
     /*
     n = number of variables
     k = number of disjunct per constraint
     m = number of constraints
     L = maximum integer value
      */
-    public static DTN generateDTN(int n, int k, int m, int L) {
+    private static DTN generateDTN(int n, int k, int m, int L) {
         List<DisjunctionConstraint> dtn = new ArrayList<>();
 
         for (int i = 0; i < m; i++) {
@@ -55,12 +52,12 @@ public class DtnGenerator {
         return new DTN(n, dtn);
     }
 
-    public static BinaryConstraint generateDisjunct(int n, int L){
+    private static BinaryConstraint generateDisjunct(int n, int L){
         // Select two random variables, make sure they are different
         int[] variables = generateTwoRandom(n);
 
         // Select integer in range [O,L] with 50% chance
-        int r = generateRandomInRange(-L, L);
+        int r = generateRandomInRange(-L, L + 1);
 
         int x = variables[0];
         int y = variables[1];
@@ -156,5 +153,4 @@ public class DtnGenerator {
 
         return new STN(10, binaryConstraints);
     }
-
 }
