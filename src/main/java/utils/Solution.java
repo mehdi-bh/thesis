@@ -1,4 +1,4 @@
-package model;
+package utils;
 
 public class Solution {
     private double [][] shortestPathsMatrix;
@@ -41,9 +41,8 @@ public class Solution {
 
     public boolean isJobShopConsistent(){
         double[][] timeWindows = timeWindowsJobShop();
-        int n = timeWindows.length-1;
+        int n = timeWindows.length - 1;
         return timeWindows[n][0] <= timeWindows[n][1];
-//        return timeWindows[n][0] >= timeWindows[n][1];
     }
     public boolean isConsistent(){
         double[][] timeWindows = timeWindows();

@@ -1,49 +1,22 @@
-import algorithms.FloydWarshall;
-import algorithms.StnCombinations;
-import model.*;
-import utils.DtnGenerator;
+package utils;
+
+import constraints.BinaryConstraint;
+import constraints.DisjunctionConstraint;
+import model.DTN;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import static utils.Utils.printMatrix;
-
-public class TestGeneratedDTN {
-    public static void main(String[] args) throws IOException {
-//        DTN dtn = DtnGenerator.generateConsistentDTN(5, 2, 5, 3);
-//
-//        System.out.println(dtn);
-//        printToFile(dtn);
-
-        DTN dtn = readFromFile("dtnGenerated.txt");
-        List<STN> STNs = StnCombinations.compute(dtn);
-
-        int nbConsistent = 0;
-        for (STN stn: STNs){
-            Solution solution = FloydWarshall.compute(stn);
-            boolean isConsistent = solution.isConsistent();
-            if (isConsistent){
-                System.out.println(stn);
-                printMatrix(stn.getMatrix());
-                printMatrix(solution.getShortestPathsMatrix());
-                System.out.println("******** Time Windows ********");
-                printMatrix(solution.timeWindows());
-
-                if (++nbConsistent == 3) break;
-            }
-        }
-    }
-
-    public static void printToFile(DTN dtn) throws IOException {
+public class FileHandling {
+    public static void printToFile(DTN dtn, String fileName) throws IOException {
         try {
-            FileWriter file = new FileWriter("dtnGenerated.txt");
-            
+            FileWriter file = new FileWriter(fileName);
+
             file.write(dtn.getN() + "\n");
             file.write(dtn.getDisjunctionConstraints().size() + "\n");
             for (DisjunctionConstraint disjunction : dtn.getDisjunctionConstraints()) {

@@ -1,4 +1,4 @@
-package model;
+package constraints;
 
 import java.util.List;
 

@@ -2,14 +2,15 @@ import algorithms.StnCombinations;
 import model.*;
 
 import algorithms.FloydWarshall;
-import utils.DtnGenerator;
+import utils.Solution;
 
 import java.util.List;
 
+import static jobshop.Utils.jobShopToDTN;
 import static utils.Utils.*;
 
 @SuppressWarnings("ALL")
-public class Main {
+public class JobShop {
     public static void main(String[] args) {
 
         //################## Example STN ##################
@@ -35,7 +36,7 @@ public class Main {
 //        DTN dtnFromJobShop = jobShopToDTN(jobShop,12);
     }
 
-    public static void resolveJobShop(JobShop jobShop, int limit) {
+    public static void resolveJobShop(jobshop.JobShop jobShop, int limit) {
         DTN dtnFromJobShop = jobShopToDTN(jobShop, limit);
         List<STN> STNs = StnCombinations.compute(dtnFromJobShop);
 
@@ -55,32 +56,6 @@ public class Main {
             }
         }
     }
-
-//    public static void sprandGenerator(){
-//        //        boolean res = false;
-////        while (!res) {
-////            System.out.println("*** NEW SPRAND STN ***");
-////
-////            STN example = Generator.sprandSTN(10, 0.25);
-//////            testSTN(example);
-////            printMatrix(example.getNetwork());
-////
-////            System.out.println("*********");
-////
-////            Solution solution = FloydWarshall.compute(example);
-////
-////            printMatrix(solution.getShortestPathsMatrix());
-////
-////            System.out.println("*********");
-////
-////            printMatrix(timeWindows(solution));
-////
-////            res = Utils.isConsistent(solution);
-////
-////            System.out.println("*** END SPRAND STN ***\n");
-////
-////        }
-//    }
 
 //    public void backup(){
 //        // DTN avec l'example jobshop comme j'ai fait dans le bloc notes

@@ -1,4 +1,4 @@
-package model;
+package constraints;
 
 public class BinaryConstraint {
     private int x;
@@ -57,6 +57,6 @@ public class BinaryConstraint {
 
     @Override
     public String toString() {
-        return "x" + x + " - " + "x" + y + " <= " + r;
+        return "x" + y + " - " + "x" + x + " <= " + r;
     }
 }

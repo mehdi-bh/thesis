@@ -1,4 +1,4 @@
-package model;
+package jobshop;
 
 import java.util.*;
 

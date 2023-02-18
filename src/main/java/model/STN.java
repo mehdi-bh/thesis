@@ -1,8 +1,9 @@
 package model;
 
+import constraints.BinaryConstraint;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class STN {
     private int n;

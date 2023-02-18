@@ -1,7 +1,7 @@
 package algorithms;
 
 import model.STN;
-import model.Solution;
+import utils.Solution;
 
 public class FloydWarshall {
     public static Solution compute (STN stn) {

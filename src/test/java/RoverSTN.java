@@ -1,14 +1,12 @@
 import algorithms.FloydWarshall;
-import model.BinaryConstraint;
+import constraints.BinaryConstraint;
 import model.STN;
-import model.Solution;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import static utils.Utils.*;
 
-public class Test {
+public class RoverSTN {
     public static void main(String[] args) {
         /*
         z = 0

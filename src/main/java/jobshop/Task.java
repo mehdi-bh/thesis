@@ -1,4 +1,4 @@
-package model;
+package jobshop;
 
 public class Task {
     private int id,machine, dur;

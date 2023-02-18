@@ -1,8 +1,8 @@
 package algorithms;
 
-import model.BinaryConstraint;
+import constraints.BinaryConstraint;
 import model.DTN;
-import model.DisjunctionConstraint;
+import constraints.DisjunctionConstraint;
 import model.STN;
 
 import java.util.ArrayList;

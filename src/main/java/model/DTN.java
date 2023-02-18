@@ -1,5 +1,7 @@
 package model;
 
+import constraints.DisjunctionConstraint;
+
 import java.util.List;
 
 public class DTN {
